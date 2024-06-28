@@ -1,0 +1,165 @@
+<!-- cart.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Itinerary</title>
+    <link rel="stylesheet" href="/styles/cart.css" />
+</head>
+<body>
+    <h1>Travel Itinerary</h1>
+    <form id="checkoutForm" action="/summary" method="post">
+        <ul>
+            <% cartItems.forEach(item => { %>
+            <li>
+              <% if (item.type === 'attraction') { %>
+                <%= item.name %> - <%= item.price %> -
+                <!-- Input field for quantity -->
+                <label for="quantity_<%= item.id %>">Quantity:</label>
+                <input
+                    type="number"
+                    name="quantity_<%= item.id %>"
+                    id="quantity_<%= item.id %>"
+                    value="<%= item.quantity %>"
+                    min="1"
+                />
+                <!-- Additional options for attractions -->
+                <label for="date_<%= item.id %>">Date:</label>
+                <input
+                    type="date"
+                    name="date_<%= item.id %>"
+                    id="date_<%= item.id %>"
+                    value="<%= item.date %>"
+                />
+            
+                <label for="note_<%= item.id %>">Note:</label>
+                <textarea
+                    name="note_<%= item.id %>"
+                    id="note_<%= item.id %>"
+                    rows="4"
+                    cols="50"
+                ><%= item.note %></textarea>
+                <!-- Hidden input fields for attraction details -->
+                <input
+                    type="hidden"
+                    name="attractionId_<%= item.id %>"
+                    value="<%= item.id %>"
+                />
+                <input
+                    type="hidden"
+                    name="attractionName_<%= item.id %>"
+                    value="<%= item.name %>"
+                />
+                <input
+                    type="hidden"
+                    name="attractionPrice_<%= item.id %>"
+                    value="<%= item.price %>"
+                />
+                <a
+                    href="/remove-item?id=<%= item.id %>&type=<%= item.type %>"
+                    class="remove-button"
+                >Remove</a>
+            <% } else if (item.type === 'hotel') { %> <%= item.name %> - <%=
+                item.price %> -
+                <!-- Additional options for hotels -->
+                <label for="bedrooms_<%= item.id %>">Bedrooms:</label>
+                <select name="bedrooms_<%= item.id %>" id="bedrooms_<%= item.id %>">
+                    <option value="1" <% if (item.bedrooms === 1) { %> selected <% } %>>1</option>
+                    <option value="2" <% if (item.bedrooms === 2) { %> selected <% } %>>2</option>
+                    <option value="3" <% if (item.bedrooms === 3) { %> selected <% } %>>3</option>
+                    <!-- Add more options as needed -->
+                </select>
+
+                <label for="checkInTime_<%= item.id %>">Check-in Time:</label>
+                <input
+                    type="time"
+                    name="checkInTime_<%= item.id %>"
+                    id="checkInTime_<%= item.id %>"
+                    value="<%= item.checkInTime %>"
+                />
+
+                <label for="checkOutTime_<%= item.id %>">Check-out Time:</label>
+                <input
+                    type="time"
+                    name="checkOutTime_<%= item.id %>"
+                    id="checkOutTime_<%= item.id %>"
+                    value="<%= item.checkOutTime %>"
+                />
+
+                <label for="persons_<%= item.id %>">Number of Persons:</label>
+                <input
+                    type="number"
+                    name="persons_<%= item.id %>"
+                    id="persons_<%= item.id %>"
+                    value="<%= item.persons %>"
+                    min="1"
+                />
+                <!-- Hidden input fields for hotel details -->
+                <input
+                    type="hidden"
+                    name="hotelId_<%= item.id %>"
+                    value="<%= item.id %>"
+                />
+                <input
+                    type="hidden"
+                    name="hotelName_<%= item.id %>"
+                    value="<%= item.name %>"
+                />
+                <input
+                    type="hidden"
+                    name="hotelPrice_<%= item.id %>"
+                    value="<%= item.price %>"
+                />
+                <!-- Add hidden fields for additional hotel options -->
+                <input
+                    type="hidden"
+                    name="hotelBedrooms_<%= item.id %>"
+                    value="<%= item.bedrooms %>"
+                />
+                <input
+                    type="hidden"
+                    name="hotelCheckInTime_<%= item.id %>"
+                    value="<%= item.checkInTime %>"
+                />
+                <input
+                    type="hidden"
+                    name="hotelCheckOutTime_<%= item.id %>"
+                    value="<%= item.checkOutTime %>"
+                />
+                <input
+                    type="hidden"
+                    name="hotelPersons_<%= item.id %>"
+                    value="<%= item.persons %>"
+                />
+                <a
+                    href="/remove-item?id=<%= item.id %>&type=<%= item.type %>"
+                    class="remove-button"
+                >Remove</a>
+                <% } %>
+                <!-- Remove item button -->
+            </li>
+            <% }); %>
+        </ul>
+        <!-- Submit button for checkout -->
+        <button type="submit">Summary</button>
+    </form>
+
+    <script>
+        // Add event listener to input fields for quantity adjustment
+        const quantityInputFields = document.querySelectorAll('[id^="quantity_"]');
+        quantityInputFields.forEach(inputField => {
+            inputField.addEventListener('input', function() {
+                const newQuantity = this.value;
+                // Update hidden input field for quantity to be sent in the form
+                const itemId = this.id.split('_')[1];
+                const hiddenQuantityInput = document.getElementById(`newQuantity_${itemId}`);
+                if (hiddenQuantityInput) {
+                    hiddenQuantityInput.value = newQuantity;
+                }
+            });
+        });
+    </script>    
+    
+</body>
+</html>

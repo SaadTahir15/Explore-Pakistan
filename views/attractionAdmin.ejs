@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Attractions</title>
+    <link rel="stylesheet" href="/styles/destinationAdmin.css">
+</head>
+<body>
+    <div class="button-container">
+        <a href="/destinations" class="button">Destinations</a>
+        <a href="/attractions" class="button">Attractions</a>
+        <a href="/hotels" class="button">Hotels</a>
+    </div>
+    <div class="container">
+        <h1>Attractions</h1>
+        <div class="destinations">
+            <% attraction.forEach(attraction => { %>
+                <div class="destination-card">
+                    <h2 class="attraction-name"><%= attraction.name %></h2>
+                    <div class="destination-buttons">
+                        <!-- Edit Button -->
+                        <form action="/attractions/<%= attraction.attraction_id %>" method="GET">
+                            <!-- <input type="hidden" name="_method" value="PATCH"> -->
+                            <button type="submit" class="edit-button">Edit</button>
+                        </form>
+                        <!-- Delete Button -->
+                        <form action="/delete/attractions/<%= attraction.attraction_id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <!-- Form for Adding New Attraction -->
+        <form action="/attractions" method="POST" class="add-destination-form">
+            <h2>Add New Attraction</h2>
+            <label for="destination">Destination:</label>
+            <select id="destination" name="destination_id" required>
+                <!-- Fetch destination options dynamically from the server -->
+                <% destinations.forEach(destination => { %>
+                    <option value="<%= destination.destination_id %>"><%= destination.name %></option>
+                <% }) %>
+            </select>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+            <label for="image_url">Image:</label>
+            <input type="file" id="image_url" name="image_url" required>
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required>
+            <label for="detailed_description">Detailed Description:</label>
+            <textarea id="detailed_description" name="detailed_description" required></textarea>
+            <button type="submit" class="add-button">Add Attraction</button>
+        </form>
+        
+    </div>
+</body>
+</html>

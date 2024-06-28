@@ -1,0 +1,39 @@
+<!-- checkout.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/styles/summary.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Summary</h1>
+        <div class="attractions">
+            <% attractions.forEach(attraction => { %>
+                <div class="attraction">
+                    <h2><%= attraction.attractionName %></h2>
+                    <p>Quantity: <%= attraction.quantity %></p>
+                    <p>Total Price: $<%= attraction.itemTotalPrice %></p> <!-- Add toFixed(2) to ensure two decimal places -->
+                </div>
+            <% }); %>
+        </div>
+        <div class="hotels">
+            <% hotels.forEach(hotel => { %>
+                <div class="hotel">
+                    <h2><%= hotel.hotelName %></h2>
+                    <p>Total Price: $<%= hotel.itemTotalPrice %></p> <!-- Add toFixed(2) to ensure two decimal places -->
+                </div>
+            <% }); %>
+        </div>
+        <div class="total">
+            <h2>Total Price: $<%= totalPrice %></h2> <!-- Add toFixed(2) to ensure two decimal places -->
+        </div>
+        <form action="/confirm" method="post">
+            <button type="submit">Confirm Order</button>
+        </form>
+    </div>
+</body>
+</html>

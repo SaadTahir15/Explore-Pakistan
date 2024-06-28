@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/29502220_7551685.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.navbar ul{
+    position: absolute;
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    align-items:center;
+    justify-content:center;
+    text-align: center;
+    list-style-type: none;
+    width: 100%;
+    padding: 0%;
+    color: black;
+}
+
+@keyframes slideInRight {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0;
+    }
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Package card styles */
+.package-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Package image styles */
+.package-image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Package details styles */
+.package-details {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Package name styles */
+.package-name {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Package description styles */
+.package-description {
+    margin-bottom: 15px;
+    color: #666;
+}
+
+/* Package price styles */
+.package-price {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+/* Destination, hotel, attraction styles */
+h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Location styles */
+p {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+#cart {
+    position: relative;
+}
+
+#cart img {
+    width: 30px;
+    height: 30px;
+}
+
+#cartItemCount {
+    position: absolute;
+    top: 20px;
+    right: -5px;
+    color: black;
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 15px;
+    min-width: 15px;
+    text-align: center;
+}

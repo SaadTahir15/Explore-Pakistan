@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Destinations</title>
+    <link rel="stylesheet" href="/styles/destinationAdmin.css" />
+  </head>
+  <body>
+    <div class="button-container">
+      <a href="/destinations" class="button">Destinations</a>
+      <a href="/attractions" class="button">Attractions</a>
+      <a href="/hotels" class="button">Hotels</a>
+    </div>
+    <div class="container">
+      <h1>Destinations</h1>
+      <div class="destinations">
+        <% destinations.forEach(destination => { %>
+        <div class="destination-card">
+          <h2 class="destination-name"><%= destination.name %></h2>
+          <!-- <p class="destination-description"><%= destination.description %></p>
+                    <p class="destination-location">Location: <%= destination.location %></p> -->
+          <div class="destination-buttons">
+            <!-- Edit Button -->
+            <form
+              action="destinations/<%= destination.destination_id %>"
+              method="GET"
+            >
+              <!-- <input type="hidden" name="_method" value="PATCH"> -->
+              <button type="submit" class="edit-button">Edit</button>
+            </form>
+            <!-- Delete Button -->
+            <form
+              action="delete/destinations/<%= destination.destination_id %>"
+              method="POST"
+            >
+              <input type="hidden" name="_method" value="DELETE" />
+              <button type="submit" class="delete-button">Delete</button>
+            </form>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <!-- Form for Adding New Destination -->
+      <form action="/destinations" method="POST" class="add-destination-form">
+        <h2>Add New Destination</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <label for="image_url">Image:</label>
+        <input type="file" id="image_url" name="image_url" required />
+        <label for="tags">Tags:</label>
+        <select id="tags" name="tags" multiple required>
+          <option value="beach">Beach</option>
+          <option value="mountain">Mountain</option>
+          <option value="city">City</option>
+          <option value="historic">Historic</option>
+          <!-- Add more tag options as needed -->
+        </select>
+        <button type="submit" class="add-button">Add Destination</button>
+      </form>
+    </div>
+  </body>
+</html>

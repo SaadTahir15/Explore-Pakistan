@@ -1,0 +1,57 @@
+/* itinerary.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../images/29502220_7551685.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(248, 248, 248, 0.8); /* Light gray background with transparency */
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    backdrop-filter: blur(0px); /* Add blur effect to the container */
+    background-color: rgba(255, 255, 255, 0.8); /* Container background with transparency */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333; /* Dark gray text color */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #444444; /* Dark gray label color */
+}
+
+.attraction-details {
+    margin-bottom: 10px;
+}
+
+.attraction-details span {
+    font-weight: normal;
+    margin-right: 10px;
+    color: #555555; /* Medium gray text color */
+}
+
+.note {
+    margin-top: 10px;
+    color: #777777; /* Light gray text color for notes */
+}

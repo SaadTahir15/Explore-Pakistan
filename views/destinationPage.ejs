@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations</title>
+    <link rel="stylesheet" href="/styles/destinationPage.css">
+</head>
+<body>
+    <!-- Carousel -->
+    <div class="carousel">
+        <nav class="navbar">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/destinationPage">Destinations</a></li>
+                <li><a href="/hotelPage">Hotels</a></li>
+                <li><a href="/currentDeals">Current Deals</a></li>
+                <li><a href="/currentHappenings">Current Events</a></li>
+                <% if (user) { %>
+                    <!-- If user is logged in, show Logout button -->
+                    <li><a href="/logout">Logout</a></li>
+                <% } else { %>
+                    <!-- If user is not logged in, show Login button -->
+                    <li><a href="/login">Login</a></li>
+                <% } %>
+                <li><a href="/register">Register</a></li>
+                <li id="cart">
+                    <a href="/cart">
+                        <img src="/images/cart-icon.png" alt="Cart">
+                    </a>
+                    <span id="cartItemCount">0</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="txtBar">
+            <div class="text">
+                <h2 style="font-weight: bold">Where would you like to go?</h2>
+            </div>
+            <div class="search-form">
+                <form action="/search" method="GET">
+                    <div class="InputContainer">
+                        <input
+                            placeholder="Search.."
+                            id="input"
+                            class="input"
+                            name="text"
+                            type="text"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="content-header">
+            <h1>Destinations</h1>
+            <div class="filter-options">
+                <form id="filter-form" action="/filter" method="POST">
+                    <label for="rating">Filter by Rating:</label>
+                    <select id="rating" name="rating">
+                        <option value="all">All Ratings</option>
+                        <option value="4">4 Stars & Above</option>
+                        <option value="4.5">4.5 Stars & Above</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                
+                    <label for="tag">Filter by Tag:</label>
+                    <select id="tag" name="tag">
+                        <option value="all">All Tags</option>
+                        <option value="romantic">Romantic</option>
+                        <option value="modern">Modern</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="scenic">Scenic</option>
+                        <option value="historical">Historical</option>
+                        <!-- Add more tag options as needed -->
+                    </select>
+                        
+                    <button type="submit">Filter</button>
+                </form>               
+            </div>
+        </div>
+        <% datas.forEach(feature => { %>
+        <div class="card" data-rating="<%= feature.average_rating %>" data-tags="<%= feature.tags %>">
+            <!-- Card content -->
+            <img class="card-image" src="<%= feature.image_url %>" alt="<%= feature.country %>">
+            <div class="card-content">
+                <h2><%= feature.name %></h2>
+                <p><%= feature.description %></p>
+                <!-- <p class="price"><%= feature.price %></p> -->
+                <div class="card-bottom">
+                    <form action="/explore" method="POST">
+                        <input type="hidden" name="destinationId" value="<%= feature.destination_id %>">
+                        <button class="animated-button">
+                            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                                ></path>
+                            </svg>
+                            <span class="text">Explore</span>
+                            <span class="circle"></span>
+                            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="rating">
+                        &#9733; <!-- Empty star icon -->
+                        <%= feature.average_rating %> <!-- Rating value -->
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <script src="/cart.js"></script>
+</body>
+</html>

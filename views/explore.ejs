@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <link rel="stylesheet" href="/styles/explore.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/destinationPage">Destinations</a></li>
+            <li><a href="/currentDeals">Current Deals</a></li>
+            <li><a href="/hotelPage">Hotels</a></li>
+            <li><a href="/currentHappenings">Current Events</a></li>
+            <% if (user) { %>
+                <!-- If user is logged in, show Logout button -->
+                <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+                <!-- If user is not logged in, show Login button -->
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <li><a href="/signup">Register</a></li>
+            <li id="cart">
+                <a href="/cart">
+                    <img src="/images/cart-icon.png" alt="Cart">
+                </a>
+                <span id="cartItemCount">0</span>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="heading">
+        <h1><%= datas[0].destination_name %> Top Things to Do</h1>
+    </div>    
+
+    <div class="content">
+        <% datas.forEach(feature => { %>
+        <div class="card" data-rating="<%= feature.average_rating %>" data-tags="<%= feature.tags %>">
+            <!-- Card content -->
+            <img class="card-image" src="<%= feature.image_url %>" alt="<%= feature.country %>">
+            <div class="card-content">
+                <h2><%= feature.name %></h2>
+                <p><%= feature.description %></p>
+                <p class="price"><%= feature.price %></p>
+                <div class="card-bottom">
+                    <form action="/details" method="GET">
+                        <input type="hidden" name="attractionId" value="<%= feature.attraction_id %>">
+                        <button class="animated-button">
+                            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                            </svg>
+                            <span class="text">Details</span>
+                            <span class="circle"></span>
+                            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="rating">
+                        &#9733; <!-- Empty star icon -->
+                        <%= feature.average_rating %> <!-- Rating value -->
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <script src="/cart.js"></script>
+</body>
+</html>

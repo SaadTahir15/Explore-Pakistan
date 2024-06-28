@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels</title>
+    <link rel="stylesheet" href="/styles/hotelPage.css">
+</head>
+<body>
+    <!-- Carousel -->
+    <div class="carousel">
+        <nav class="navbar">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/destinationPage">Destinations</a></li>
+                <li><a href="/hotelPage">Hotels</a></li>
+                <li><a href="/currentDeals">Current Deals</a></li>
+                <li><a href="/currentHappenings">Current Events</a></li>
+                <% if (user) { %>
+                    <!-- If user is logged in, show Logout button -->
+                    <li><a href="/logout">Logout</a></li>
+                <% } else { %>
+                    <!-- If user is not logged in, show Login button -->
+                    <li><a href="/login">Login</a></li>
+                <% } %>
+                <li><a href="/register">Register</a></li>
+                <li id="cart">
+                    <a href="/cart">
+                        <img src="/images/cart-icon.png" alt="Cart">
+                    </a>
+                    <span id="cartItemCount">0</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="txtBar">
+            <div class="text">
+                <h2 style="font-weight: bold">Where would you like to stay?</h2>
+            </div>
+            <div class="search-form">
+                <form action="/search" method="GET">
+                    <div class="InputContainer">
+                        <input
+                            placeholder="Search.."
+                            id="input"
+                            class="input"
+                            name="text"
+                            type="text"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="content-header">
+            <h1>Hotels</h1>
+            <div class="filter-options">
+                <form id="filter-form" action="/filterHotels" method="GET"> <!-- Changed action to /filterHotels and method to GET -->
+                    <label for="destination">Filter by Destination:</label>
+                    <select id="destination" name="destination">
+                        <option value="all">All Destinations</option>
+                        <!-- Add options dynamically based on available destinations -->
+                        <% destinations.forEach(destination => { %>
+                            <option value="<%= destination.destination_id %>"><%= destination.name %></option>
+                        <% }); %>
+                    </select>                    
+                    <button type="submit">Filter</button>
+                </form>
+            </div>
+        </div>        
+        
+        <% datas.forEach(hotel => { %>
+        <div class="card">
+            <!-- Card content -->
+            <img class="card-image" src="<%= hotel.image_url %>" alt="<%= hotel.name %>">
+            <div class="card-content">
+                <h2><%= hotel.name %></h2>
+                <p><%= hotel.description %></p>
+                <div class="card-bottom">
+                    <form action="/hotelDetails" method="GET">
+                        <input type="hidden" name="hotelId" value="<%= hotel.hotel_id %>">
+                        <button class="animated-button">
+                            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                                ></path>
+                            </svg>
+                            <span class="text">Details</span>
+                            <span class="circle"></span>
+                            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="rating">
+                        &#9733; <!-- Empty star icon -->
+                        <%= hotel.average_rating %> <!-- Rating value -->
+                    </p>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <script src="/cart.js"></script>
+</body>
+</html>

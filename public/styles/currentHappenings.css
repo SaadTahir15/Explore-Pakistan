@@ -1,0 +1,94 @@
+/* Set background color and font styles */
+body {
+    margin: 0;
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url('../images/29502220_7551685.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.navbar ul{
+    position: absolute;
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    align-items:center;
+    justify-content:center;
+    text-align: center;
+    list-style-type: none;
+    width: 100%;
+    padding: 0%;
+    color: black;
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.happening-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.event-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.event-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.event-date {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.destination-name {
+    font-size: 16px;
+    color: #666;
+}
+
+#cart {
+    position: relative;
+}
+
+#cart img {
+    width: 30px;
+    height: 30px;
+}
+
+#cartItemCount {
+    position: absolute;
+    top: 20px;
+    right: -5px;
+    color: black;
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 15px;
+    min-width: 15px;
+    text-align: center;
+}

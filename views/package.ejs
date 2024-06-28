@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Packages</title>
+    <link rel="stylesheet" href="/styles/package.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/destinationPage">Destinations</a></li>
+            <li><a href="/hotelPage">Hotels</a></li>
+            <li><a href="/currentDeals">Current Deals</a></li>
+            <li><a href="/currentHappenings">Current Events</a></li>
+            <% if (user) { %>
+                <!-- If user is logged in, show Logout button -->
+                <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+                <!-- If user is not logged in, show Login button -->
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <li><a href="/register">Register</a></li>
+            <li id="cart">
+                <a href="/cart">
+                    <img src="/images/cart-icon.png" alt="Cart">
+                </a>
+                <span id="cartItemCount">0</span>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Explore Our Travel Packages</h1>
+        <div class="packages">
+            <% packages.forEach(package => { %>
+                <div class="package-card">
+                    <img src="<%= package.package_image_url %>" alt="<%= package.package_name %>" class="package-image">
+                    <div class="package-details">
+                        <h2 class="package-name"><%= package.package_name %></h2>
+                        <p class="package-description"><%= package.package_description %></p>
+                        <p class="package-price">$<%= parseFloat(package.package_price).toFixed(2) %></p>
+                        <h3>Destination: <%= package.destination_name %></h3>
+                        <p><%= package.destination_description %> - <%= package.destination_location %></p>
+                        <h3>Hotel: <%= package.hotel_name %></h3>
+                        <p><%= package.hotel_description %> - <%= package.hotel_location %></p>
+                        <h3>Attraction: <%= package.attraction_name %></h3>
+                        <p><%= package.attraction_description %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

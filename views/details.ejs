@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="/styles/details.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/destinationPage">Destinations</a></li>
+            <li><a href="/hotelPage">Hotels</a></li>
+            <li><a href="/currentDeals">Current Deals</a></li>
+            <li><a href="/currentHappenings">Current Events</a></li>
+            <% if (user) { %>
+                <!-- If user is logged in, show Logout button -->
+                <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+                <!-- If user is not logged in, show Login button -->
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <li><a href="/signup">Register</a></li>
+            <li id="cart">
+                <a href="/cart">
+                    <img src="/images/cart-icon.png" alt="Cart">
+                </a>
+                <span id="cartItemCount">0</span>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="pic-detail-container">
+        <div class="pic-detail">
+            <div class="img">
+                <img src="<%= datas[0].image_url %>" alt="">
+            </div>
+            <div class="description">
+                <p><%= datas[0].detailed_description %></p>
+            </div>
+        </div>
+    </div>
+    
+    <button id="toggleReviews">Show Reviews</button>
+    <!-- Button to write a review -->
+    <button id="writeReview">Write a Review</button>
+
+    <form id="writeReviewForm" action="/write-review" method="POST" style="display: none;">
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        <br>
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" required></textarea>
+        <br>
+        <input type="hidden" id="attId" name="attId" value= <%= datas[0].attraction_id %>>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="reviews-container" id="reviewsContainer" style="display: none;">
+        <% datas.forEach(review => { %>
+            <div class="review">
+                <p>User ID: <%= review.user_id %></p>
+                <p>Review: <%= review.comment %></p>
+                <p> &#9733; <%= review.rating %></p>
+            </div>
+        <% }); %>
+    </div>
+
+    <!-- Add to cart form -->
+    <form id="addToCartForm" action="/add-to-cart" method="POST">
+        <input type="hidden" name="attractionId" value="<%= datas[0].attraction_id %>">
+        <input type="hidden" name="attractionName" value="<%= datas[0]. attraction_name %>">
+        <input type="hidden" name="attractionPrice" value="<%= datas[0].price %>">
+        <button type="submit">Add to Cart</button>
+    </form>
+
+    <script>
+        const toggleButton = document.getElementById('toggleReviews');
+        const writeReviewButton = document.getElementById('writeReview');
+        const writeReviewForm = document.getElementById('writeReviewForm');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+
+        toggleButton.addEventListener('click', () => {
+            if (reviewsContainer.style.display === 'none') {
+                reviewsContainer.style.display = 'block';
+                toggleButton.textContent = 'Hide Reviews';
+            } else {
+                reviewsContainer.style.display = 'none';
+                toggleButton.textContent = 'Show Reviews';
+            }
+        });
+
+        // Add event listener for writing a review button
+        writeReviewButton.addEventListener('click', () => {
+            // Toggle the display of the write review form
+            if (writeReviewForm.style.display === 'none') {
+                writeReviewForm.style.display = 'block';
+            } else {
+                writeReviewForm.style.display = 'none';
+            }
+        });
+    </script>
+    <script src="/cart.js"></script>
+</body>
+</html>

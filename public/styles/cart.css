@@ -1,0 +1,65 @@
+/* cart.css */
+body {
+    margin: 0;
+    max-width: 100%;
+    /* overflow: hidden; */
+    background-image: url('../images/29502220_7551685.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Arial", sans-serif;
+    backdrop-filter: blur(5px); /* Add blur effect to the background */
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #000; /* Change text color to black */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.3); /* Update border color with transparency */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* Add background color with transparency */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000; /* Change label text color to black */
+}
+
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Update border color with transparency */
+    border-radius: 3px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.2); /* Add background color with transparency */
+    color: #000; /* Change text color to black */
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}

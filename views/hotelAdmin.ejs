@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Hotels</title>
+    <link rel="stylesheet" href="/styles/destinationAdmin.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: gray;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hotels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hotel-card {
+    width: 20%;
+    margin-bottom: 20px; /* This creates space between rows, you may want to remove it */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-sizing: border-box; /* Include padding and border in the width */
+    margin-right: 2%; /* Add some space between cards */
+}
+
+.hotels .hotel-card:last-child {
+    margin-right: 0; /* Remove margin from the last card to prevent overflow */
+}
+
+.hotel-name,
+.hotel-description,
+.hotel-location {
+    text-align: center;
+}
+
+.hotel-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.edit-button,
+.delete-button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    background-color: #45a049;
+}
+
+.add-hotel-form {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.add-hotel-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-hotel-form input,
+.add-hotel-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2196f3;
+    color: #fff;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #0b7dda;
+}
+
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <a href="/destinations" class="button">Destinations</a>
+        <a href="/attractions" class="button">Attractions</a>
+        <a href="/hotels" class="button">Hotels</a>
+    </div>
+    <div class="container">
+        <h1>Hotels</h1>
+        <div class="hotels">
+            <% hotels.forEach(hotel => { %>
+                <div class="hotel-card">
+                    <h2 class="hotel-name"><%= hotel.name %></h2>
+                    <div class="hotel-buttons">
+                        <!-- Edit Button -->
+                        <form action="/hotels/<%= hotel.hotel_id %>" method="GET">
+                            <input type="hidden" name="_method" value="PATCH">
+                            <button type="submit" class="edit-button">Edit</button>
+                        </form>
+                        <!-- Delete Button -->
+                        <form action="/delete/hotels/<%= hotel.hotel_id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <!-- Form for Adding New Hotel -->
+        <form action="/hotels" method="POST" class="add-hotel-form">
+            <h2>Add New Hotel</h2>
+            <label for="destination">Destination:</label>
+            <select id="destination" name="destination_id" required>
+                <!-- Fetch destination options dynamically from the server -->
+                <% destinations.forEach(destination => { %>
+                    <option value="<%= destination.destination_id %>"><%= destination.name %></option>
+                <% }) %>
+            </select>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+            <label for="image_url">Image:</label>
+            <input type="file" id="image_url" name="image_url" required>
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required>
+            <!-- <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required> -->
+            <button type="submit" class="add-button">Add Hotel</button>
+        </form>
+        
+    </div>
+</body>
+</html>

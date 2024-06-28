@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Destination</title>
+    <!-- Include any CSS stylesheets or libraries here -->
+</head>
+<body>
+    <h1>Modify Destination</h1>
+    <form action="/edit/destinations/<%= destinationId %>" method="POST">
+        <input type="hidden" name="_method" value="PATCH">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= name %>">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required><%= description %></textarea>
+        <label for="image">Change Picture:</label>
+        <input type="file" id="image" name="image">
+        <button type="submit">Done</button>
+    </form>
+    <!-- Include any scripts if needed -->
+</body>
+</html>

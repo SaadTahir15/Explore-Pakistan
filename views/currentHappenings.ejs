@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Happenings</title>
+    <link rel="stylesheet" href="/styles/currentHappenings.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/destinationPage">Destinations</a></li>
+            <li><a href="/hotelPage">Hotels</a></li>
+            <li><a href="/currentDeals">Current Deals</a></li>
+            <li><a href="/currentHappenings">Current Events</a></li>
+            <% if (user) { %>
+                <!-- If user is logged in, show Logout button -->
+                <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+                <!-- If user is not logged in, show Login button -->
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <li><a href="/register">Register</a></li>
+            <li id="cart">
+                <a href="/cart">
+                    <img src="/images/cart-icon.png" alt="Cart">
+                </a>
+                <span id="cartItemCount">0</span>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Current Happenings</h1>
+        <div class="happenings">
+            <% happenings.forEach(happening => { %>
+                <div class="happening-card">
+                    <h2 class="event-name"><%= happening.event_name %></h2>
+                    <p class="event-description"><%= happening.event_description %></p>
+                    <p class="event-date">Date: <%= happening.event_date %></p>
+                    <p class="destination-name">Destination: <%= happening.destination_name %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
